@@ -15,11 +15,7 @@ namespace School_WebAPI_BE.Validation
         public MappingProfiles()
         {
             CreateMap<School, SchoolDto>().ReverseMap();
-
             CreateMap<Student, StudentDto>().ReverseMap();
-
-            //CreateMap<List<School>, List<SchoolDto>>().ReverseMap();
-            //CreateMap<List<Student>, List<StudentDto>>().ReverseMap();
         }
     }
 }
