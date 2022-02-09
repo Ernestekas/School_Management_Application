@@ -40,6 +40,8 @@ namespace School_WebAPI_BE
             services.AddTransient<SchoolService>();
             services.AddTransient<SchoolRepository>();
 
+            services.AddTransient<SchoolValidator>();
+
             services.AddAutoMapper(typeof(MappingProfiles));
 
             services.AddSwaggerGen(c =>

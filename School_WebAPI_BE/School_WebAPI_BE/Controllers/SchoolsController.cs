@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using School_WebAPI_BE.Dtos.School;
 using School_WebAPI_BE.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -21,15 +22,45 @@ namespace School_WebAPI_BE.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            List<SchoolDto> result = await _schoolService.GetAllAsync();
-            return Ok(result);
+            try
+            {
+                List<SchoolDto> result = await _schoolService.GetAllAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return Conflict(ex);
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            SchoolDto result = await _schoolService.GetByIdAsync(id);
-            return Ok(result);
+            try
+            {
+                SchoolDto result = await _schoolService.GetByIdAsync(id);
+                return Ok(result);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(SchoolDto school)
+        {
+            try
+            {
+                int id = await _schoolService.CreateAsync(school);
+                SchoolDto schoolDto = await _schoolService.GetByIdAsync(id);
+
+                return Created($"~/Api/Schools/{id}", schoolDto);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

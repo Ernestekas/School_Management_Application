@@ -3,6 +3,7 @@ using School_WebAPI_BE.Dtos.School;
 using School_WebAPI_BE.Dtos.Student;
 using School_WebAPI_BE.Models;
 using School_WebAPI_BE.Repositories;
+using School_WebAPI_BE.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,13 @@ namespace School_WebAPI_BE.Services
     {
         private readonly SchoolRepository _schoolRepository;
         private readonly IMapper _mapper;
+        private readonly SchoolValidator _schoolValidator;
 
-        public SchoolService(SchoolRepository schoolRepository, IMapper mapper)
+        public SchoolService(SchoolRepository schoolRepository, IMapper mapper, SchoolValidator schoolValidator)
         {
             _schoolRepository = schoolRepository;
             _mapper = mapper;
+            _schoolValidator = schoolValidator;
         }
 
         public async Task<List<SchoolDto>> GetAllAsync()
@@ -37,9 +40,24 @@ namespace School_WebAPI_BE.Services
             SchoolDto result = new SchoolDto();
             School school = await _schoolRepository.GetByIdIncludedAsync(id);
 
+            _schoolValidator.ValidateModel(school);
+
             _mapper.Map(school, result);
 
             return result;
+        }
+
+        public async Task<int> CreateAsync(SchoolDto school)
+        {
+            School newSchool = new School()
+            {
+                Name = school.Name
+            };
+
+            _schoolValidator.ValidateModel(newSchool);
+            _schoolValidator.CheckIdIsZero(newSchool);
+
+            return await _schoolRepository.CreateAsync(newSchool);
         }
     }
 }
