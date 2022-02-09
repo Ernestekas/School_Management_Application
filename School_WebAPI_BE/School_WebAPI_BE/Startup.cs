@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using School_WebAPI_BE.Data;
+using School_WebAPI_BE.Repositories;
+using School_WebAPI_BE.Services;
 using School_WebAPI_BE.Validation;
 using System;
 using System.Collections.Generic;
@@ -35,7 +37,8 @@ namespace School_WebAPI_BE
             var defaultConnection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DataContext>(d => d.UseSqlServer(defaultConnection));
 
-            services.AddAutoMapper(typeof(MappingProfiles));
+            services.AddTransient<SchoolService>();
+            services.AddTransient<SchoolRepository>();
 
             services.AddSwaggerGen(c =>
             {
