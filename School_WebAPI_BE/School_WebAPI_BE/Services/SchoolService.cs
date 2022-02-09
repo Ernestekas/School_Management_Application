@@ -11,6 +11,7 @@ namespace School_WebAPI_BE.Services
     public class SchoolService
     {
         private readonly SchoolRepository _schoolRepository;
+        private readonly StudentRepository _studentRepository;
         private readonly IMapper _mapper;
         private readonly SchoolValidator _schoolValidator;
 
@@ -58,10 +59,11 @@ namespace School_WebAPI_BE.Services
 
         public async Task DeleteAsync(int id)
         {
-            School school = await _schoolRepository.GetByIdAsync(id);
+            School school = await _schoolRepository.GetByIdIncludedAsync(id);
 
             _schoolValidator.TryValidateGet(school);
 
+            await _studentRepository.RemoveRangeAsync(school.Students);
             await _schoolRepository.RemoveAsync(school);
         }
     }
