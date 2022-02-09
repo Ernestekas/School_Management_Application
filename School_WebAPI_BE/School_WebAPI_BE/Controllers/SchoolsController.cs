@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using School_WebAPI_BE.Dtos.School;
 using School_WebAPI_BE.Services;
 using System;

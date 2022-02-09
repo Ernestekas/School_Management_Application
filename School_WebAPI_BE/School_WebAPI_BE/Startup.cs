@@ -41,6 +41,7 @@ namespace School_WebAPI_BE
             services.AddTransient<SchoolRepository>();
 
             services.AddTransient<SchoolValidator>();
+            services.AddTransient<StudentValidator>();
 
             services.AddAutoMapper(typeof(MappingProfiles));
 
