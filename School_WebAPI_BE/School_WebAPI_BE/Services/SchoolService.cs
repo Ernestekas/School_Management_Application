@@ -59,5 +59,14 @@ namespace School_WebAPI_BE.Services
 
             return await _schoolRepository.CreateAsync(newSchool);
         }
+
+        public async Task DeleteAsync(int id)
+        {
+            School school = await _schoolRepository.GetByIdAsync(id);
+
+            _schoolValidator.TryValidateGet(school);
+
+            await _schoolRepository.RemoveAsync(school);
+        }
     }
 }
