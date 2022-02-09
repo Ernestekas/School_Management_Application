@@ -33,3 +33,6 @@ Work in progress.
                 - RETURNS: List of students (schools names not included) or one student with school name.
 
     - Models validation implemented. If rules are not met then API returns status code with error messages.
+
+    - Database migration. Migration file to create database and tables.
+        - To run: open package manager console. Type: update-database.
