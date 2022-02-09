@@ -40,6 +40,8 @@ namespace School_WebAPI_BE
             services.AddTransient<SchoolService>();
             services.AddTransient<SchoolRepository>();
 
+            services.AddAutoMapper(typeof(MappingProfiles));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "School_WebAPI_BE", Version = "v1" });
