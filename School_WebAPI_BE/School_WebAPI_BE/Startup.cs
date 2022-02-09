@@ -40,6 +40,9 @@ namespace School_WebAPI_BE
             services.AddTransient<SchoolService>();
             services.AddTransient<SchoolRepository>();
 
+            services.AddTransient<StudentService>();
+            services.AddTransient<StudentRepository>();
+
             services.AddTransient<SchoolValidator>();
             services.AddTransient<StudentValidator>();
 
