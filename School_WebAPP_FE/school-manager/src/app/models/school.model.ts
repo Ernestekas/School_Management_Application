@@ -1,4 +1,7 @@
+import Student from "./student.model";
+
 export default interface School{
     id?: number,
-    name?: string
+    name?: string,
+    students?: Student[]
 }

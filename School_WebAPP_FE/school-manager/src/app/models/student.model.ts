@@ -2,5 +2,6 @@ export default interface Student{
     id?: number,
     firstName?: string,
     lastName?: string,
-    schoolId? : number
+    schoolId? : number,
+    schoolName? : string
 }

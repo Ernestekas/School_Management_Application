@@ -8,13 +8,17 @@ import { MainSectionComponent } from './components/main-section/main-section.com
 import { SchoolsComponent } from './components/schools/schools.component';
 import { StudentsComponent } from './components/students/students.component';
 import { FormsModule } from '@angular/forms';
+import { ListSchoolsComponent } from './components/schools/list-schools/list-schools.component';
+import { CreateSchoolComponent } from './components/schools/create-school/create-school.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainSectionComponent,
     SchoolsComponent,
-    StudentsComponent
+    StudentsComponent,
+    ListSchoolsComponent,
+    CreateSchoolComponent
   ],
   imports: [
     BrowserModule,
