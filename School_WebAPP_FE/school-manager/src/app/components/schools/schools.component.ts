@@ -28,7 +28,7 @@ export class SchoolsComponent implements OnInit {
   private getAllSchools() : void {
     this._schoolsService.getAll().subscribe((schools) => {
       this.schools = schools;
-      this.calculateSchools(this.schools);
+      // this.calculateSchools(this.schools);
       this.sendSchoolsEvent.emit(schools);
     });
     
@@ -60,6 +60,5 @@ export class SchoolsComponent implements OnInit {
       this.schools[i].students = schoolStudents;
       this.schools[i].studentsCount = schoolStudents.length;
     }
-
   }
 }
