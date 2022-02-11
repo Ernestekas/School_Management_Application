@@ -44,6 +44,10 @@ namespace School_WebAPI_BE.Controllers
             {
                 return BadRequest(ex.Message);
             }
+            catch (Exception ex)
+            {
+                return StatusCode(406, ex.Message);
+            }
         }
 
         [HttpPost]

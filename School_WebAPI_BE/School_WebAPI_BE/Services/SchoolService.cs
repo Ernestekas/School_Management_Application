@@ -15,9 +15,10 @@ namespace School_WebAPI_BE.Services
         private readonly IMapper _mapper;
         private readonly SchoolValidator _schoolValidator;
 
-        public SchoolService(SchoolRepository schoolRepository, IMapper mapper, SchoolValidator schoolValidator)
+        public SchoolService(SchoolRepository schoolRepository, StudentRepository studentRepository, IMapper mapper, SchoolValidator schoolValidator)
         {
             _schoolRepository = schoolRepository;
+            _studentRepository = studentRepository;
             _mapper = mapper;
             _schoolValidator = schoolValidator;
         }

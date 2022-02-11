@@ -1,20 +1,22 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th scope="col" colspan="3" class="bg-dark text-white text-center"><i>Schools</i></th>
+            <th scope="col" colspan="4" class="bg-dark text-white text-center"><i>Schools</i></th>
         </tr>
-        <tr class="align-self-center">
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Actions</th>
+        <tr>
+            <th class="col-1" scope="col">#</th>
+            <th class="col-3" scope="col">Name</th>
+            <th class="col-1 text-center" scope="col"># of Students</th>
+            <th class="col-1 text-center" scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let school of schoolsInput; let i = index" class="align-self-center">
+        <tr *ngFor="let school of schoolsInput; let i = index">
             <th scope="row">{{i + 1}}</th>
             <td>{{school.name}}</td>
-            <td>
-                <button class="btn btn-outline-dark">Dummy btn</button>
+            <td class="text-center">{{school.studentsCount}}</td>
+            <td class="text-center" >
+                <button class="btn btn-outline-danger" (click)="delete(school.id!)">Delete</button>
             </td>
         </tr>
     </tbody>

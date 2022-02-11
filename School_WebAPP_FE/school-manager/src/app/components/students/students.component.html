@@ -1,1 +1,9 @@
-<p>students works!</p>
+<app-create-student
+    (createStudentEvent)="create($event)"
+    [schoolsInput]="schoolsInput">
+</app-create-student>
+<app-list-students
+    (removeStudentEvent)="remove($event)"
+    [studentsInput]="students"
+    [schoolsInput]="schoolsInput">
+</app-list-students>

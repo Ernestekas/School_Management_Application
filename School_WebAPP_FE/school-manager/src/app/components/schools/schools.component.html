@@ -1,6 +1,8 @@
-<div class="container my-1">
-    <app-list-schools 
-        [schoolsInput]="schools"
-    ></app-list-schools>
-</div>
-
+<app-create-school
+    (createSchoolEvent)="create($event)">
+</app-create-school>
+<app-list-schools 
+    [schoolsInput]="schools"
+    [studentsInput]="students"
+    (removeSchoolEvent)="remove($event)">
+</app-list-schools>

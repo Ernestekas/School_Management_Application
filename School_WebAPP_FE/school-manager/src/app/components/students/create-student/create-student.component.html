@@ -1,0 +1,28 @@
+<button type="button" class="btn btn-outline-dark mb-1 text-center" (click)="openPopup()">Create new school</button>
+
+<div class="modal" id="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h4 class="modal-title">New Student</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control" placeholder="Enter first name" id="newName" name="newName" [(ngModel)]="newStudent.firstName">
+                <input type="text" class="form-control my-1" placeholder="Enter second name" id="newName" name="newName" [(ngModel)]="newStudent.lastName">
+                <select class="form-select" name="my-select" [(ngModel)]="selectedSchool">
+                    <option *ngFor="let school of schoolsInput" [ngValue]="school">
+                        {{school.name}}
+                    </option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-dark" (click)="submitCreate(newStudent)">
+                    Create
+                </button>
+                <button type="button" class="btn btn-outline-danger" (click)="cancelCreate()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

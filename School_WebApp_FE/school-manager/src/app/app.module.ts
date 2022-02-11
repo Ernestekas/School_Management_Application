@@ -10,6 +10,8 @@ import { StudentsComponent } from './components/students/students.component';
 import { FormsModule } from '@angular/forms';
 import { ListSchoolsComponent } from './components/schools/list-schools/list-schools.component';
 import { CreateSchoolComponent } from './components/schools/create-school/create-school.component';
+import { ListStudentsComponent } from './components/students/list-students/list-students.component';
+import { CreateStudentComponent } from './components/students/create-student/create-student.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { CreateSchoolComponent } from './components/schools/create-school/create
     SchoolsComponent,
     StudentsComponent,
     ListSchoolsComponent,
-    CreateSchoolComponent
+    CreateSchoolComponent,
+    ListStudentsComponent,
+    CreateStudentComponent
   ],
   imports: [
     BrowserModule,

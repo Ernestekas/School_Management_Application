@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import School from 'src/app/models/school.model';
 import Student from 'src/app/models/student.model';
@@ -11,9 +11,19 @@ import { StudentsService } from 'src/app/services/students.service';
   styleUrls: ['./main-section.component.scss']
 })
 export class MainSectionComponent implements OnInit {
+  public schools : School[] = [];
+  public students : Student[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public receiveSchools(schools : School[]) : void {
+    this.schools = schools;
+  }
+
+  public receiveStudents(students : Student[]) :void {
+    this.students = students;
   }
 }
