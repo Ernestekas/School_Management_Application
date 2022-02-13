@@ -10,7 +10,6 @@ import { SchoolsService } from 'src/app/services/schools.service';
   styleUrls: ['./create-school.component.scss']
 })
 export class CreateSchoolComponent implements OnInit {
-
   public displayStyle = "none";
   
   public newSchool : School = {studentsCount: 0};
