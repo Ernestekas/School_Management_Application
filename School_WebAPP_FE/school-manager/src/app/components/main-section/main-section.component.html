@@ -1,14 +1,10 @@
 <div class="container my-1">
     <div class="row">
         <div class="col">
-            <app-schools
-                (sendSchoolsEvent)="receiveSchools($event)">
-            </app-schools>
+            <app-schools></app-schools>
         </div>
         <div class="col">
-            <app-students
-                [schoolsInput]="schools">
-            </app-students>
+            <app-students></app-students>
         </div>
     </div>
 </div>

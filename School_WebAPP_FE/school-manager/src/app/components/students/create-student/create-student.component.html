@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-outline-dark mb-1 text-center" (click)="openPopup()">Create new school</button>
+<button type="button" class="btn btn-outline-dark mb-1 text-center" (click)="openPopup()">Add new Student</button>
 
 <div class="modal" id="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
     <div class="modal-dialog" role="document">
@@ -10,8 +10,8 @@
                 <input type="text" class="form-control" placeholder="Enter first name" id="newName" name="newName" [(ngModel)]="newStudent.firstName">
                 <input type="text" class="form-control my-1" placeholder="Enter second name" id="newName" name="newName" [(ngModel)]="newStudent.lastName">
                 <select class="form-select" name="my-select" [(ngModel)]="selectedSchool">
-                    <option *ngFor="let school of schoolsInput" [ngValue]="school">
-                        {{school.name}}
+                    <option *ngFor="let school of schools; let i = index" [ngValue]="school">
+                        {{i + 1}}. {{school.name}}
                     </option>
                 </select>
             </div>
