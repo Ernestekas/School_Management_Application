@@ -5,6 +5,7 @@ import School from 'src/app/models/school.model';
 import Student from 'src/app/models/student.model';
 import { DataContainerService } from 'src/app/services/data-container.service';
 import { SchoolsService } from 'src/app/services/schools.service';
+import { StudentsService } from 'src/app/services/students.service';
 
 @Component({
   selector: 'app-list-schools',
@@ -15,12 +16,15 @@ export class ListSchoolsComponent implements OnInit {
   public schools : School[] = [];
   public subscription : Subscription;
 
-  constructor(private _dataContainerService : DataContainerService, private _schoolsService : SchoolsService) {
+  constructor(
+    private _dataContainerService : DataContainerService, 
+    private _schoolsService : SchoolsService, 
+    private _studentsService : StudentsService ) {
     this.subscription = this._dataContainerService.getSchools().subscribe({
       next: (schools) => {
         this.schools = schools;
       },
-      error: (error : Error) => console.log("Something's bad happened."),
+      error: (error : Error) => console.log(error.message),
       complete: () => console.log("OK")
     });
   }
@@ -42,9 +46,20 @@ export class ListSchoolsComponent implements OnInit {
           next: (schools) => {
             this._dataContainerService.clearSchools();
             this._dataContainerService.sendSchools(schools);
-          }
-        })
-      }
+            
+            this._studentsService.getAll().subscribe({
+              next: (students) => {
+                this._dataContainerService.clearStudents();
+                this._dataContainerService.sendStudents(students);
+              }
+            })
+          },
+          error: (error: Error) => console.log(error.name, error.message),
+          complete: () => console.log("Get data from API: OK")
+        });
+      },
+      error: (error: Error) => console.log(error.name, error.message),
+      complete: () => console.log("Remove request API: OK")
     });
   }
 }
