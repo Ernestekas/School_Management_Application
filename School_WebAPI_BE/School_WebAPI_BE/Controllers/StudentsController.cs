@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using School_WebAPI_BE.Dtos.Student;
 using School_WebAPI_BE.Services;
 using System;

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import School from '../models/school.model';
@@ -8,7 +8,7 @@ import School from '../models/school.model';
 })
 export class SchoolsService {
   private url : string = "https://localhost:44319/api/Schools/"
-
+  
   constructor(private http : HttpClient) { }
 
   public getAll() : Observable<School[]> {

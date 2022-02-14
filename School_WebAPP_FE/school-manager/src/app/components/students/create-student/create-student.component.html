@@ -14,9 +14,10 @@
                         {{i + 1}}. {{school.name}}
                     </option>
                 </select>
+                <p id="studentErrorMessage" class="text-danger text-left" hidden></p>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-outline-dark" (click)="submitCreate(newStudent)">
+                <button type="button" class="btn btn-outline-dark" (click)="submitCreate(newStudent)">
                     Create
                 </button>
                 <button type="button" class="btn btn-outline-danger" (click)="cancelCreate()">

@@ -9,7 +9,7 @@ namespace School_WebAPI_BE.Validation
         {
             RuleFor(s => s.FirstName).NotEmpty();
             RuleFor(s => s.LastName).NotEmpty();
-            RuleFor(s => s.SchoolId).NotNull();
+            RuleFor(s => s.SchoolId).GreaterThan(0);
         }
     }
 }

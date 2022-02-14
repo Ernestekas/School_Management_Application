@@ -11,19 +11,19 @@ import { StudentsService } from 'src/app/services/students.service';
   styleUrls: ['./create-student.component.scss']
 })
 export class CreateStudentComponent implements OnInit {
-  public schools : School[] = [];
-  public subscription : Subscription;
+  public schools: School[] = [];
+  public subscription: Subscription;
 
-  public selectedSchool : School = {studentsCount: 0};
-  
+  public selectedSchool: School = { studentsCount: 0 };
+
   public displayStyle = "none";
-  
-  public newStudent : Student = {};
+
+  public newStudent: Student = {};
 
   constructor(
-    private _studentsService : StudentsService,
-    private _dataContainerService : DataContainerService
-  ) { 
+    private _studentsService: StudentsService,
+    private _dataContainerService: DataContainerService
+  ) {
     this.subscription = this._dataContainerService.getSchools().subscribe((schools) => {
       this.schools = schools;
     });
@@ -32,10 +32,10 @@ export class CreateStudentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public submitCreate(newStudent : Student) {
+  public submitCreate(newStudent: Student) {
     newStudent.schoolId = this.selectedSchool.id;
     newStudent.schoolName = this.selectedSchool.name;
-    
+
     this._studentsService.create(newStudent).subscribe({
       next: () => {
         this._studentsService.getAll().subscribe({
@@ -43,23 +43,27 @@ export class CreateStudentComponent implements OnInit {
             this._dataContainerService.clearStudents();
             this._dataContainerService.sendStudents(students);
           },
-          error: (error: Error) => console.log(error.name, error.message),
-          complete: () => console.log("Get data from API: OK")
+          error: (response) => this.setError(response.error),
+          complete: () => this.hideError()
         });
       },
-      error: (error: Error) => console.log(error.name, error.message),
-      complete: () => console.log("POST data to API: OK")
-    });
-    
-    this.selectedSchool = {studentsCount: 0}
-    this.newStudent = {}
+      error: (response) => {
+        this.setError(response.error)
+      },
+      complete: () => {
+        this.hideError();
+        this.selectedSchool = { studentsCount: 0 }
+        this.newStudent = {}
 
-    this.closePopup();
+        this.closePopup();
+      }
+    });
   }
 
   public cancelCreate() {
+    this.hideError();
     this.newStudent = {};
-    this.selectedSchool = {studentsCount: 0};
+    this.selectedSchool = { studentsCount: 0 };
 
     this.closePopup();
   }
@@ -70,5 +74,18 @@ export class CreateStudentComponent implements OnInit {
 
   private closePopup() {
     this.displayStyle = "none";
+  }
+
+  private setError(message: any) {
+    let errorElement = document.getElementById("studentErrorMessage");
+    errorElement!.innerHTML = '* ' + message;
+    console.log(errorElement?.innerHTML)
+    errorElement!.removeAttribute("hidden");
+  }
+
+  private hideError() {
+    let errorElement = document.getElementById("studentErrorMessage");
+    errorElement!.innerHTML = '';
+    errorElement!.setAttribute("hidden", "hidden");
   }
 }

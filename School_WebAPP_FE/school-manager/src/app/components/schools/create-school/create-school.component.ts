@@ -11,39 +11,44 @@ import { SchoolsService } from 'src/app/services/schools.service';
 })
 export class CreateSchoolComponent implements OnInit {
   public displayStyle = "none";
-  
-  public newSchool : School = {studentsCount: 0};
-  
+
+  public newSchool: School = { studentsCount: 0 };
+
   constructor(
-    private _dataContainerService : DataContainerService,
-    private _schoolsService : SchoolsService
+    private _dataContainerService: DataContainerService,
+    private _schoolsService: SchoolsService
   ) { }
 
   ngOnInit(): void {
   }
 
-  public submitCreate(newSchool : School) : void {
+  public submitCreate(newSchool: School): void {
     this._schoolsService.create(newSchool).subscribe({
-      next: () => {
+      next: (school) => {
         this._schoolsService.getAll().subscribe({
           next: (schools) => {
             this._dataContainerService.clearSchools();
             this._dataContainerService.sendSchools(schools);
           },
-          error: (error : Error) => console.log(error.name, error.message),
+          error: (response) => this.setError(response.error),
           complete: () => console.log("API receive OK.")
         });
+        this.hideError();
+        newSchool.name = "";
+        this.closePopup();
       },
-      error: (error : Error) => console.log(error.name, error.message),
+      error: (response) => {
+        this.setError(response.error);
+      },
       complete: () => console.log("API post request OK")
     });
-    
-    newSchool.name = "";
-    this.closePopup();
   }
 
-  public cancelCreate() : void {
+  public cancelCreate(): void {
+    this.hideError();
     this.newSchool.name = "";
+    let nameInput = document.getElementById("newName");
+    nameInput!.style.border = ""
     this.closePopup();
   }
 
@@ -53,5 +58,17 @@ export class CreateSchoolComponent implements OnInit {
 
   private closePopup() {
     this.displayStyle = "none";
+  }
+
+  private setError(message: string) {
+    let errorElement = document.getElementById("errorMessage");
+    errorElement!.innerHTML = 'Dabar';
+    errorElement!.removeAttribute("hidden");
+  }
+
+  private hideError() {
+    let errorElement = document.getElementById("errorMessage");
+    errorElement!.innerHTML = '';
+    errorElement!.setAttribute("hidden", "hidden");
   }
 }
